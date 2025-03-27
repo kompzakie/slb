@@ -21,9 +21,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt install -y \
     firefox
 
 # Configure VNC password (default: "ubuntu")
-echo "[2] Setting up VNC password (default: 'ubuntu')..."
+echo "[2] Creating VNC password file (default: 'ubuntu')..."
 mkdir -p ~/.vnc
-echo "ubuntu" | vncpasswd -f > ~/.vnc/passwd
+# Create password file using x11vnc's storepasswd (alternative to vncpasswd)
+x11vnc -storepasswd ubuntu ~/.vnc/passwd
 chmod 600 ~/.vnc/passwd
 
 # Start VNC server (runs in background)
